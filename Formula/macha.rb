@@ -1,20 +1,21 @@
 class Macha < Formula
   desc "Reports Mac state (Bluetooth) to Home Assistant over MQTT"
   homepage "https://github.com/humanfriend22/macha"
-  url "https://github.com/humanfriend22/macha/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "0a811a56d773f8e24ce14eeb28fb4a69244e403468165f49bc44f84b29826ea4"
+  url "https://github.com/humanfriend22/macha/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "39df31a6948578a5e086c8dfe8474f9dc4013cb1a2e9e404824dcff12e547cfb"
   license "GPL-3.0-or-later"
 
   depends_on xcode: ["27.0", :build]
   depends_on :macos
 
   def install
-    system "swift", "build", "--disable-sandbox", "-c", "release"
-    bin.install ".build/release/macha"
+    # Builds macha and wraps it in macha.app: macOS only grants Location Services to a signed app bundle.
+    system "scripts/build.sh", libexec
+    bin.install_symlink libexec/"macha.app/Contents/MacOS/macha"
   end
 
   service do
-    run [opt_bin/"macha", "run"]
+    run [opt_libexec/"macha.app/Contents/MacOS/macha", "run"]
     keep_alive true
     log_path var/"log/macha.log"
     error_log_path var/"log/macha.log"
