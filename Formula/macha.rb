@@ -1,8 +1,8 @@
 class Macha < Formula
   desc "Reports Mac state (Bluetooth) to Home Assistant over MQTT"
   homepage "https://github.com/humanfriend22/macha"
-  url "https://github.com/humanfriend22/macha/archive/refs/tags/v0.1.2.tar.gz"
-  sha256 "f999142352ea8807bc1ea5cbddbe2b6c18ecda71e8df6a158351114e68e22048"
+  url "https://github.com/humanfriend22/macha/archive/refs/tags/v0.1.4.tar.gz"
+  sha256 "6ad9d81ca2979aac3ffb49f709e44e23cace93483840f34e89bf26bb18cf2497"
   license "GPL-3.0-or-later"
 
   depends_on xcode: ["27.0", :build]
